@@ -9,11 +9,12 @@ options = Options()
 options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 
-url = "https://www.commodityonline.com/mandiprices/tomato/karnataka"
+url = "https://www.commodityonline.com/mandiprices-history/tomato/karnataka"
 
 try:
     driver.get(url)
-    table_locator = (By.CSS_SELECTOR, '#main-table2')
+    table_locator = (By.CSS_SELECTOR, 'body > section.mandi > div > div.row.mandi_dropdown > div.row > div > div.mandi_highlight')
+    print(table_locator)
     table = WebDriverWait(driver, 10).until(EC.presence_of_element_located(table_locator))
 except Exception as e:
     print("INVALID: ", e)
@@ -27,14 +28,16 @@ for row in table.find_elements(By.TAG_NAME, 'tr'):
     row_data = [cell.text for cell in row.find_elements(By.TAG_NAME, 'td')]
     table_data.append(row_data)
 
-df = pd.DataFrame(table_data, columns=column_names)
-df = df.dropna()
-df = df.drop('Mobile App', axis=1)
-data = pd.DataFrame(df.iloc[0])
-print(type(data))
+# df = pd.DataFrame(table_data, columns=column_names)
+# df = df.dropna()
+# df = df.drop('Mobile App', axis=1)
+# data = pd.DataFrame(df.iloc[0])
+# print(type(data))
 
-csv_file_path = r"C:\Users\Hewlett Packard\major-project\Agro-demand-supply-analysis\datasets\historical_price_tomato.csv"
+# csv_file_path = r"C:\Users\Hewlett Packard\major-project\Agro-demand-supply-analysis\datasets\historical_price_tomato.csv"
 
-data.to_csv(csv_file_path, mode='a', header=False, index=False)
+# data.to_csv(csv_file_path, mode='a', header=False, index=False)
+
+print(row_data)
 
 driver.quit()
