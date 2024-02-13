@@ -6,5 +6,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/get_prices')
+def get_prices():
+    #process input
+    return render_template('price.html')
 if __name__ == '__main__':
     app.run(debug=True)
