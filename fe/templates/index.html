@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Analysis</title>
-    <style>
-        button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
-    <h1>Agro Demand Analysis</h1>
-    <button onclick="alert('Button 1 clicked')">Button 1</button>
-    <button onclick="alert('Button 2 clicked')">Button 2</button>
+    <h1>Welcome to Commodity Price Prediction</h1>
+    <p>Enter commodity name and number of days to predict prices:</p>
+    <form action="/get_prices" method="post">
+        <label for="commodity_name">Commodity Name:</label><br>
+        <input type="text" id="commodity_name" name="commodity_name"><br>
+        <label for="num_days">Number of Days:</label><br>
+        <input type="number" id="num_days" name="num_days"><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
